@@ -1,10 +1,10 @@
-import { paymentMethodToComponent } from "./supportedPaymentApps";
+import { ManualPayment } from "./ManualPayment";
 import { PaymentSectionSkeleton } from "@/checkout/sections/PaymentSection/PaymentSectionSkeleton";
 import { usePayments } from "@/checkout/sections/PaymentSection/usePayments";
 import { useCheckoutUpdateState } from "@/checkout/state/updateStateStore";
 
 export const PaymentMethods = () => {
-	const { availablePaymentGateways, fetching } = usePayments();
+	const {  fetching } = usePayments();
 	const {
 		changingBillingCountry,
 		updateState: { checkoutDeliveryMethodUpdate },
@@ -17,16 +17,11 @@ export const PaymentMethods = () => {
 
 	return (
 		<div className="gap-y-8">
-			{availablePaymentGateways.map((gateway) => {
-				const Component = paymentMethodToComponent[gateway.id];
-				return (
-					<Component
-						key={gateway.id}
-						// @ts-expect-error -- gateway matches the id but TypeScript doesn't know that
-						config={gateway}
-					/>
-				);
-			})}
-		</div>
+      
+      <ManualPayment />
+
+    
+
+    </div>
 	);
 };
